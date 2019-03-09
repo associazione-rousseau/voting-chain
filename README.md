@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-# Voting-chain system based on Monero
-=======
-# SIMPLE PROOF OF CONCEPT - JUST FOR DEMOSTRATION PURPOSE
+# SIMPLE PROOF OF CONCEPT - JUST FOR DEMONSTRATION PURPOSE
 
 ## VOTING-CHAIN system based on Monero
 
 
 
 
-
-
-
-
->>>>>>> bcdc68a257174b656b1c6837e57154f236e21ac5
 
 # Monero
 
