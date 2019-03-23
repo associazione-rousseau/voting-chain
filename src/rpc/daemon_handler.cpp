@@ -327,14 +327,18 @@ namespace rpc
       return;
     }
 
+    
     if(!tvc.m_should_be_relayed || !req.relay)
     {
-      LOG_PRINT_L0("[on_send_raw_tx]: tx accepted, but not relayed");
+      LOG_PRINT_L0("[on_send_raw_tx]: tx accepted, should not be relayed but it will be ||");
+      /* //vc
       res.error_details = "Not relayed";
       res.relayed = false;
       res.status = Message::STATUS_OK;
 
-      return;
+      return;  */
+    } else {
+      LOG_PRINT_L0("[on_send_raw_tx]: tx accepted and normally relayed ||");
     }
 
     NOTIFY_NEW_TRANSACTIONS::request r;

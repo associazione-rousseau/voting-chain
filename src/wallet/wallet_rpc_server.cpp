@@ -829,6 +829,7 @@ namespace tools
     // validate the transfer requested and populate dsts & extra
     if (!validate_transfer(req.destinations, req.payment_id, dsts, extra, true, er))
     {
+      LOG_PRINT_L0("[VC] wallet_rpc_server::on_transfer - validate_transfer is false");
       return false;
     }
 
@@ -849,6 +850,7 @@ namespace tools
       if (ptx_vector.empty())
       {
         er.code = WALLET_RPC_ERROR_CODE_TX_NOT_POSSIBLE;
+        LOG_PRINT_L0("[VC] on_transfer_split calling create_transactions_2");
         er.message = "No transaction created";
         return false;
       }
@@ -889,6 +891,7 @@ namespace tools
     // validate the transfer requested and populate dsts & extra; RPC_TRANSFER::request and RPC_TRANSFER_SPLIT::request are identical types.
     if (!validate_transfer(req.destinations, req.payment_id, dsts, extra, true, er))
     {
+      LOG_PRINT_L0("[VC] wallet_rpc_server::on_transfer_split - validate_transfer is false");
       return false;
     }
 
@@ -904,9 +907,9 @@ namespace tools
         mixin = m_wallet->adjust_mixin(req.mixin);
       }
       uint32_t priority = m_wallet->adjust_priority(req.priority);
-      LOG_PRINT_L2("on_transfer_split calling create_transactions_2");
+      LOG_PRINT_L0("[VC] on_transfer_split calling create_transactions_2");
       std::vector<wallet2::pending_tx> ptx_vector = m_wallet->create_transactions_2(dsts, mixin, req.unlock_time, priority, extra, req.account_index, req.subaddr_indices);
-      LOG_PRINT_L2("on_transfer_split called create_transactions_2");
+      LOG_PRINT_L0("[VC] on_transfer_split called create_transactions_2");
 
       return fill_response(ptx_vector, req.get_tx_keys, res.tx_key_list, res.amount_list, res.fee_list, res.multisig_txset, res.unsigned_txset, req.do_not_relay,
           res.tx_hash_list, req.get_tx_hex, res.tx_blob_list, req.get_tx_metadata, res.tx_metadata_list, er);
@@ -1273,12 +1276,13 @@ namespace tools
       return false;
     }
 
+    /* //vc
     if (req.outputs < 1)
     {
       er.code = WALLET_RPC_ERROR_CODE_TX_NOT_POSSIBLE;
       er.message = "Amount of outputs should be greater than 0.";
       return  false;
-    }
+    } */
 
     try
     {
@@ -1318,12 +1322,13 @@ namespace tools
       return false;
     }
 
+    /* //vc
     if (req.outputs < 1)
     {
       er.code = WALLET_RPC_ERROR_CODE_TX_NOT_POSSIBLE;
       er.message = "Amount of outputs should be greater than 0.";
       return  false;
-    }
+    } */
 
     // validate the transfer requested and populate dsts & extra
     std::list<wallet_rpc::transfer_destination> destination;
@@ -1357,12 +1362,13 @@ namespace tools
       uint32_t priority = m_wallet->adjust_priority(req.priority);
       std::vector<wallet2::pending_tx> ptx_vector = m_wallet->create_transactions_single(ki, dsts[0].addr, dsts[0].is_subaddress, req.outputs, mixin, req.unlock_time, priority, extra);
 
+      /*
       if (ptx_vector.empty())
       {
         er.code = WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR;
         er.message = "No outputs found";
         return false;
-      }
+      } */
       if (ptx_vector.size() > 1)
       {
         er.code = WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR;
@@ -3077,6 +3083,7 @@ namespace tools
     catch (const tools::error::tx_not_possible& e)
     {
       er.code = WALLET_RPC_ERROR_CODE_TX_NOT_POSSIBLE;
+      LOG_PRINT_L0("[VC] Transaction not possible");
       er.message = (boost::format(tr("Transaction not possible. Available only %s, transaction amount %s = %s + %s (fee)")) %
         cryptonote::print_money(e.available()) %
         cryptonote::print_money(e.tx_amount() + e.fee())  %

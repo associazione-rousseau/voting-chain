@@ -389,6 +389,7 @@ namespace nodetool
   std::set<std::string> node_server<t_payload_net_handler>::get_seed_nodes(cryptonote::network_type nettype) const
   {
     std::set<std::string> full_addrs;
+    /* //vc
     if (nettype == cryptonote::TESTNET)
     {
       full_addrs.insert("212.83.175.67:28080");
@@ -415,7 +416,7 @@ namespace nodetool
       full_addrs.insert("198.74.231.92:18080");
       full_addrs.insert("195.154.123.123:18080");
       full_addrs.insert("212.83.172.165:18080");
-    }
+    } */
     return full_addrs;
   }
 

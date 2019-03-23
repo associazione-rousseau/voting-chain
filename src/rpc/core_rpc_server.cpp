@@ -728,13 +728,17 @@ namespace cryptonote
       return true;
     }
 
+
     if(!tvc.m_should_be_relayed)
     {
-      LOG_PRINT_L0("[on_send_raw_tx]: tx accepted, but not relayed");
+      LOG_PRINT_L0("[on_send_raw_tx]: tx accepted, should not be relayed but it will be");
+      /* //vc
       res.reason = "Not relayed";
       res.not_relayed = true;
       res.status = CORE_RPC_STATUS_OK;
-      return true;
+      return true; */
+    } else {
+      LOG_PRINT_L0("[on_send_raw_tx]: tx accepted and normally relayed");
     }
 
     NOTIFY_NEW_TRANSACTIONS::request r;
