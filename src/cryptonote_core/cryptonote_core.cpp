@@ -586,7 +586,7 @@ namespace cryptonote
 
     // load json & DNS checkpoints, and verify them
     // with respect to what blocks we already have
-    CHECK_AND_ASSERT_MES(update_checkpoints(), false, "One or more checkpoints loaded from json or dns conflicted with existing checkpoints.");
+    //vc CHECK_AND_ASSERT_MES(update_checkpoints(), false, "One or more checkpoints loaded from json or dns conflicted with existing checkpoints.");
 
    // DNS versions checking
     if (check_updates_string == "disabled")
@@ -983,12 +983,12 @@ namespace cryptonote
       uint64_t amount_in = 0;
       get_inputs_money_amount(tx, amount_in);
       uint64_t amount_out = get_outs_money_amount(tx);
-
-      if(amount_in <= amount_out)
+      
+      /* //vc if(amount_in <= amount_out)
       {
         MERROR_VER("tx with wrong amounts: ins " << amount_in << ", outs " << amount_out << ", rejected for tx id= " << get_transaction_hash(tx));
         return false;
-      }
+      } */
     }
     // for version > 1, ringct signatures check verifies amounts match
 
@@ -1333,7 +1333,7 @@ namespace cryptonote
 
     // load json & DNS checkpoints every 10min/hour respectively,
     // and verify them with respect to what blocks we already have
-    CHECK_AND_ASSERT_MES(update_checkpoints(), false, "One or more checkpoints loaded from json or dns conflicted with existing checkpoints.");
+    //vc CHECK_AND_ASSERT_MES(update_checkpoints(), false, "One or more checkpoints loaded from json or dns conflicted with existing checkpoints.");
 
     bvc = boost::value_initialized<block_verification_context>();
     if(block_blob.size() > get_max_block_size())

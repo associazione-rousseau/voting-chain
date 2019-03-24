@@ -126,17 +126,17 @@ static const struct {
   { 1, 1, 0, 1341378000 },
 
   // version 2 starts from block 624634, which is on or around the 23rd of November, 2015. Fork time finalised on 2015-11-20. No fork voting occurs for the v2 fork.
-  { 2, 624634, 0, 1445355000 },
+  { 2, 1, 0, 1445355000 },
 
   // versions 3-5 were passed in rapid succession from September 18th, 2016
-  { 3, 800500, 0, 1472415034 },
-  { 4, 801219, 0, 1472415035 },
-  { 5, 802660, 0, 1472415036 + 86400*180 }, // add 5 months on testnet to shut the update warning up since there's a large gap to v6
+  { 3, 1, 0, 1472415034 },
+  { 4, 1, 0, 1472415035 },
+  { 5, 1, 0, 1472415036 + 86400*180 }, // add 5 months on testnet to shut the update warning up since there's a large gap to v6
 
-  { 6, 971400, 0, 1501709789 },
-  { 7, 1057027, 0, 1512211236 },
-  { 8, 1057058, 0, 1533211200 },
-  { 9, 1057778, 0, 1533297600 },
+  { 6, 1, 0, 1501709789 },
+  { 7, 1, 0, 1512211236 },
+  { 8, 1, 0, 1533211200 },
+  { 9, 1, 0, 1533297600 },
 };
 static const uint64_t testnet_hard_fork_version_1_till = 624633;
 
@@ -150,14 +150,14 @@ static const struct {
   { 1, 1, 0, 1341378000 },
 
   // versions 2-7 in rapid succession from March 13th, 2018
-  { 2, 32000, 0, 1521000000 },
-  { 3, 33000, 0, 1521120000 },
-  { 4, 34000, 0, 1521240000 },
-  { 5, 35000, 0, 1521360000 },
-  { 6, 36000, 0, 1521480000 },
-  { 7, 37000, 0, 1521600000 },
-  { 8, 176456, 0, 1537821770 },
-  { 9, 177176, 0, 1537821771 },
+  { 2, 1, 0, 1521000000 },
+  { 3, 1, 0, 1521120000 },
+  { 4, 1, 0, 1521240000 },
+  { 5, 1, 0, 1521360000 },
+  { 6, 1, 0, 1521480000 },
+  { 7, 1, 0, 1521600000 },
+  { 8, 1, 0, 1537821770 },
+  { 9, 1, 0, 1537821771 },
 };
 
 //------------------------------------------------------------------
@@ -1117,7 +1117,7 @@ bool Blockchain::prevalidate_miner_transaction(const block& b, uint64_t height)
     return false;
   }
   MDEBUG("Miner tx hash: " << get_transaction_hash(b.miner_tx));
-  CHECK_AND_ASSERT_MES(b.miner_tx.unlock_time == height + CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW, false, "coinbase transaction transaction has the wrong unlock time=" << b.miner_tx.unlock_time << ", expected " << height + CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW);
+  //vc CHECK_AND_ASSERT_MES(b.miner_tx.unlock_time == height + CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW, false, "coinbase transaction transaction has the wrong unlock time=" << b.miner_tx.unlock_time << ", expected " << height + CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW);
 
   //check outs overflow
   //NOTE: not entirely sure this is necessary, given that this function is

@@ -162,13 +162,14 @@ namespace cryptonote
         tvc.m_overspend = true;
         return false;
       }
+      /* //vc
       else if(outputs_amount == inputs_amount)
       {
         LOG_PRINT_L1("transaction fee is zero: outputs_amount == inputs_amount, rejecting.");
         tvc.m_verifivation_failed = true;
         tvc.m_fee_too_low = true;
         return false;
-      }
+      } */
 
       fee = inputs_amount - outputs_amount;
     }
@@ -176,13 +177,13 @@ namespace cryptonote
     {
       fee = tx.rct_signatures.txnFee;
     }
-
+    /* //vc
     if (!kept_by_block && !m_blockchain.check_fee(tx_weight, fee))
     {
       tvc.m_verifivation_failed = true;
       tvc.m_fee_too_low = true;
       return false;
-    }
+    } */
 
     size_t tx_weight_limit = get_transaction_weight_limit(version);
     if ((!kept_by_block || version >= HF_VERSION_PER_BYTE_FEE) && tx_weight > tx_weight_limit)
