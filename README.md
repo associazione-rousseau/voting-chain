@@ -1,3 +1,11 @@
+# SIMPLE PROOF OF CONCEPT - JUST FOR DEMONSTRATION PURPOSE
+
+## VOTING-CHAIN system based on Monero
+
+
+
+
+
 # Monero
 
 Copyright (c) 2014-2018 The Monero Project.   
